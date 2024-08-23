@@ -54,9 +54,13 @@ Cafe Recipe App is an iOS application that allows users to browse, search, and v
 Contributions are welcome! If you have any improvements or bug fixes, feel free to submit a pull request.
 
 1.Fork the repository
+
 2.Create a new branch (git checkout -b feature/your-feature-name)
+
 3.Commit your changes (git commit -m 'Add some feature')
+
 4.Push to the branch (git push origin feature/your-feature-name)
+
 5.Create a pull request
 
 
