@@ -21,6 +21,31 @@ struct MealDetailView: View {
                     ForEach(Array(zip(mealDetail.ingredients, mealDetail.measurements)), id: \.0) { ingredient, measurement in
                         Text("\(ingredient): \(measurement)")
                     }
+                    
+                    // Additional fields
+                    if let source = mealDetail.source {
+                        Text("Source:")
+                            .font(.headline)
+                        Link(source, destination: URL(string: source)!)
+                    }
+                    
+                    if let imageSource = mealDetail.imageSource {
+                        Text("Image Source:")
+                            .font(.headline)
+                        Text(imageSource)
+                    }
+                    
+                    if let creativeCommonsConfirmed = mealDetail.creativeCommonsConfirmed {
+                        Text("Creative Commons Confirmed:")
+                            .font(.headline)
+                        Text(creativeCommonsConfirmed)
+                    }
+                    
+                    if let dateModified = mealDetail.dateModified {
+                        Text("Date Modified:")
+                            .font(.headline)
+                        Text(dateModified)
+                    }
                 } else {
                     Text("No ingredients available")
                         .font(.subheadline)
@@ -43,11 +68,5 @@ struct MealDetailView: View {
         }, message: {
             Text(viewModel.errorMessage ?? "")
         })
-    }
-}
-
-struct MealDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MealDetailView(mealId: "53015") // Example ID
     }
 }

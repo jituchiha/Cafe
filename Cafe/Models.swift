@@ -21,13 +21,30 @@ struct MealDetail: Decodable {
     let instructions: String
     let ingredients: [String]
     let measurements: [String]
+    let source: String?
+    let imageSource: String?
+    let creativeCommonsConfirmed: String?
+    let dateModified: String?
     
     // Custom initializer for default values
-    init(name: String = "Unknown", instructions: String = "No instructions available", ingredients: [String] = [], measurements: [String] = []) {
+    init(
+        name: String = "Unknown",
+        instructions: String = "No instructions available",
+        ingredients: [String] = [],
+        measurements: [String] = [],
+        source: String? = nil,
+        imageSource: String? = nil,
+        creativeCommonsConfirmed: String? = nil,
+        dateModified: String? = nil
+    ) {
         self.name = name
         self.instructions = instructions
         self.ingredients = ingredients
         self.measurements = measurements
+        self.source = source
+        self.imageSource = imageSource
+        self.creativeCommonsConfirmed = creativeCommonsConfirmed
+        self.dateModified = dateModified
     }
 
     enum CodingKeys: String, CodingKey {
@@ -75,6 +92,11 @@ struct MealDetail: Decodable {
         case measure18 = "strMeasure18"
         case measure19 = "strMeasure19"
         case measure20 = "strMeasure20"
+        
+        case source = "strSource"
+        case imageSource = "strImageSource"
+        case creativeCommonsConfirmed = "strCreativeCommonsConfirmed"
+        case dateModified = "dateModified"
     }
 
     init(from decoder: Decoder) throws {
@@ -100,6 +122,10 @@ struct MealDetail: Decodable {
         
         self.ingredients = ingredients
         self.measurements = measurements
+        self.source = try container.decodeIfPresent(String.self, forKey: .source)
+        self.imageSource = try container.decodeIfPresent(String.self, forKey: .imageSource)
+        self.creativeCommonsConfirmed = try container.decodeIfPresent(String.self, forKey: .creativeCommonsConfirmed)
+        self.dateModified = try container.decodeIfPresent(String.self, forKey: .dateModified)
     }
 }
 
