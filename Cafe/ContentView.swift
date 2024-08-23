@@ -6,26 +6,21 @@ struct MealListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Keep the search bar at the top
-                VStack {
+                if viewModel.isLoading || !viewModel.allImagesLoaded {
+                    LoadingView()
+                        .scaleEffect(1.5, anchor: .center)
+                        .padding()
+                } else {
+                    // Only show the search bar and list when loading is complete
                     TextField("Search Recipes", text: $viewModel.searchQuery)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                     
-                    if viewModel.isLoading || !viewModel.allImagesLoaded {
-                        LoadingView()
-                            .scaleEffect(1.5, anchor: .center)
-                            .padding()
-                    } else if let errorMessage = viewModel.errorMessage {
-                        Text("Error: \(errorMessage)")
-                            .foregroundColor(.red)
-                    } else if viewModel.filteredMeals.isEmpty {
-                        Spacer() // Pushes the "No matching recipes found" text to the center
+                    if viewModel.filteredMeals.isEmpty {
                         Text("No matching recipes found.")
                             .font(.headline)
                             .foregroundColor(.gray)
                             .padding()
-                        Spacer() // Pushes the "No matching recipes found" text to the center
                     } else {
                         List(viewModel.filteredMeals) { meal in
                             NavigationLink(destination: MealDetailView(mealId: meal.id)) {
@@ -45,8 +40,8 @@ struct MealListView: View {
                         .listStyle(PlainListStyle())
                     }
                 }
-                .navigationTitle("Dessert Recipes")
             }
+            .navigationTitle("Dessert Recipes")
             .task {
                 await viewModel.fetchDesserts()
             }
