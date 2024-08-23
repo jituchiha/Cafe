@@ -11,10 +11,22 @@ struct MealListView: View {
                         .scaleEffect(1.5, anchor: .center)
                         .padding()
                 } else {
-                    // Only show the search bar and list when loading is complete
-                    TextField("Search Recipes", text: $viewModel.searchQuery)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
+                    // Search Bar with Clear Button
+                    HStack {
+                        TextField("Search Recipes", text: $viewModel.searchQuery)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        if !viewModel.searchQuery.isEmpty {
+                            Button(action: {
+                                viewModel.searchQuery = ""
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 8)
+                            }
+                        }
+                    }
+                    .padding()
 
                     if viewModel.filteredMeals.isEmpty {
                         Text("No matching recipes found.")
@@ -32,7 +44,6 @@ struct MealListView: View {
                                                  .frame(width: 50, height: 50)
                                                  .cornerRadius(8)
                                         } else if phase.error != nil {
-                                            // Display error image
                                             Image(systemName: "photo.fill")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
@@ -40,7 +51,6 @@ struct MealListView: View {
                                                 .cornerRadius(8)
                                                 .foregroundColor(.gray)
                                         } else {
-                                            // Display loading spinner
                                             ProgressView()
                                                 .frame(width: 50, height: 50)
                                         }
@@ -56,7 +66,6 @@ struct MealListView: View {
             .navigationTitle(viewModel.isLoading ? "" : "Dessert Recipes")  // Conditional title
         }
         .onAppear {
-            // Ensure that the data is only fetched once, when the view first appears
             if viewModel.meals.isEmpty {
                 Task {
                     await viewModel.fetchDesserts()
