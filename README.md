@@ -20,6 +20,7 @@ Cafe is a modern, feature-rich iOS app designed for cafe lovers to discover, exp
 
 ## Future Scope
 
+- **UI Features:** Would implement smooth transitions and better UI
 - **User Authentication:** Plan to implement Google and Apple sign-in.
 - **Social Features:** Enable users to share their favorite cafes on social media.
 - **Advanced Filtering:** Introduce more filtering options for search (e.g., price range, ambiance).
