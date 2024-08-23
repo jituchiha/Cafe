@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MealListView: View {
     @StateObject private var viewModel = MealListViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -15,7 +15,7 @@ struct MealListView: View {
                     TextField("Search Recipes", text: $viewModel.searchQuery)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
-                    
+
                     if viewModel.filteredMeals.isEmpty {
                         Text("No matching recipes found.")
                             .font(.headline)
@@ -25,13 +25,25 @@ struct MealListView: View {
                         List(viewModel.filteredMeals) { meal in
                             NavigationLink(destination: MealDetailView(mealId: meal.id)) {
                                 HStack {
-                                    AsyncImage(url: URL(string: meal.thumbnail)) { image in
-                                        image.resizable()
-                                             .aspectRatio(contentMode: .fill)
-                                             .frame(width: 50, height: 50)
-                                             .cornerRadius(8)
-                                    } placeholder: {
-                                        ProgressView()
+                                    AsyncImage(url: URL(string: meal.thumbnail)) { phase in
+                                        if let image = phase.image {
+                                            image.resizable()
+                                                 .aspectRatio(contentMode: .fill)
+                                                 .frame(width: 50, height: 50)
+                                                 .cornerRadius(8)
+                                        } else if phase.error != nil {
+                                            // Display error image
+                                            Image(systemName: "photo.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 50, height: 50)
+                                                .cornerRadius(8)
+                                                .foregroundColor(.gray)
+                                        } else {
+                                            // Display loading spinner
+                                            ProgressView()
+                                                .frame(width: 50, height: 50)
+                                        }
                                     }
                                     Text(meal.name)
                                 }
@@ -42,8 +54,13 @@ struct MealListView: View {
                 }
             }
             .navigationTitle(viewModel.isLoading ? "" : "Dessert Recipes")  // Conditional title
-            .task {
-                await viewModel.fetchDesserts()
+        }
+        .onAppear {
+            // Ensure that the data is only fetched once, when the view first appears
+            if viewModel.meals.isEmpty {
+                Task {
+                    await viewModel.fetchDesserts()
+                }
             }
         }
     }
