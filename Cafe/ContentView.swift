@@ -41,24 +41,10 @@ struct MealListView: View {
                     }
                 }
             }
-            .navigationTitle("Dessert Recipes")
+            .navigationTitle(viewModel.isLoading ? "" : "Dessert Recipes")  // Conditional title
             .task {
                 await viewModel.fetchDesserts()
             }
-        }
-    }
-}
-
-struct LoadingView: View {
-    var body: some View {
-        VStack {
-            ProgressView("Fetching Recipes...")
-                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                .padding()
-            
-            Text("Loading delicious desserts...")
-                .font(.headline)
-                .padding(.top, 10)
         }
     }
 }

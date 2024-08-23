@@ -19,6 +19,7 @@
 		44B958B12C74BEB1001DBD08 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B958B02C74BEB1001DBD08 /* ViewModels.swift */; };
 		44ED10592C77BF470046C047 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED10582C77BF470046C047 /* MealDetailView.swift */; };
 		44ED105B2C77C78C0046C047 /* MealDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED105A2C77C78C0046C047 /* MealDetailViewModel.swift */; };
+		44ED105D2C780F060046C047 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED105C2C780F060046C047 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		44B958B02C74BEB1001DBD08 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		44ED10582C77BF470046C047 /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
 		44ED105A2C77C78C0046C047 /* MealDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewModel.swift; sourceTree = "<group>"; };
+		44ED105C2C780F060046C047 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				44B958AC2C74BDB5001DBD08 /* Models.swift */,
 				44B958812C74BD88001DBD08 /* CafeApp.swift */,
 				44B958832C74BD88001DBD08 /* ContentView.swift */,
+				44ED105C2C780F060046C047 /* LoadingView.swift */,
 				44ED10582C77BF470046C047 /* MealDetailView.swift */,
 				44ED105A2C77C78C0046C047 /* MealDetailViewModel.swift */,
 				44B958852C74BD8A001DBD08 /* Assets.xcassets */,
@@ -279,6 +282,7 @@
 				44B958AD2C74BDB5001DBD08 /* Models.swift in Sources */,
 				44B958B12C74BEB1001DBD08 /* ViewModels.swift in Sources */,
 				44B958842C74BD88001DBD08 /* ContentView.swift in Sources */,
+				44ED105D2C780F060046C047 /* LoadingView.swift in Sources */,
 				44ED105B2C77C78C0046C047 /* MealDetailViewModel.swift in Sources */,
 				44B958822C74BD88001DBD08 /* CafeApp.swift in Sources */,
 			);
